@@ -36,6 +36,8 @@ Terraform is configured to use an S3 bucket as backend. You need to manually cre
 
 Then, the Ray Train example uses [Weights & Biases](https://wandb.ai/) as model tracking platform. You will need a WandB account and subsequently an API TOKEN so that the workers can log information about the training process.
 
+The token can be set as an environment variable: `WANDB_API_KEY`
+
 ## Repo organization
 
 The code is organized as follows:

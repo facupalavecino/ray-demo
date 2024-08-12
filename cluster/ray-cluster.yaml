@@ -6,7 +6,7 @@ provider:
     type: aws
     region: us-east-1
     availability_zone: us-east-1a,us-east-1c
-    cache_stopped_nodes: true
+    cache_stopped_nodes: false
 
 auth:
     ssh_user: ubuntu # if using Amazon Linux AMIs then ec2-user
@@ -62,9 +62,18 @@ available_node_types:
                   SubnetId: "subnet-0a8ff342ee1a7f370"
             IamInstanceProfile:
                 Arn: "arn:aws:iam::663464815616:instance-profile/ray-demo-ec2-profile"
+            TagSpecifications:
+                - ResourceType: "instance"
+                  Tags: 
+                    - Key: "Project"
+                      Value: "ray-demo"
+                - ResourceType: "volume"
+                  Tags: 
+                    - Key: "Project"
+                      Value: "ray-demo"
 
     ray.worker.default:
-        min_workers: 1
+        min_workers: 0
         max_workers: 2
         docker:
             worker_image: "rayproject/ray:2.30.0-py311-gpu"
@@ -88,6 +97,15 @@ available_node_types:
                   SubnetId: "subnet-0a8ff342ee1a7f370"
             IamInstanceProfile:
                 Arn: "arn:aws:iam::663464815616:instance-profile/ray-demo-ec2-profile"
+            TagSpecifications:
+                - ResourceType: "instance"
+                  Tags: 
+                    - Key: "Project"
+                      Value: "ray-demo"
+                - ResourceType: "volume"
+                  Tags: 
+                    - Key: "Project"
+                      Value: "ray-demo"
 
 head_node_type: ray.head.default
 
